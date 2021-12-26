@@ -2,29 +2,32 @@
 #include "klase_otoci3.h"
 using namespace std;
 
-/*int numIslands(island<int> &isl,vector<vector<int>>&matrica) {
-    int n=matrica.size();
-    int m=matrica[0].size();
-    if(n==1 && m==1) {
-        if(matrica[0][0]=='1')
-        return 1;
-        else return 0;
+int numIslands(island<int> &isl, vector<vector<int>> &matrica)
+{
+    int r = matrica.size();
+    int c = matrica[0].size();
+    if (r == 1 && c == 1)
+    {
+        if (matrica[0][0] == '1')
+            return 1;
+        else
+            return 0;
     }
 
-    int ans=0;
-      for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(matrica[i][j]=='1'){
-                    ans++;
-                    isl.(matrica,i,j);
-                }
+    int ans = 0;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            if (matrica[i][j] == 1)
+            {
+                ans++;
+                isl.DepthFirstSearch(matrica, i, j, r, c);
             }
         }
-        return ans;
     }
-
+    return ans;
 }
-*/
 
 int main()
 {
@@ -56,7 +59,8 @@ int main()
                       {0, 0, 1, 0, 0, 0, 0},
                       {1, 1, 0, 0, 0, 0, 1}};
 
-            cout << "Broj otoka iznosi: " << isl.countIslands(matrix) << endl;
+            // cout << "Broj otoka iznosi: " << isl.countIslands(matrix) << endl;
+            cout << "Broj otoka iznosi: " << numIslands(isl, matrix) << endl;
 
             break;
 
