@@ -1,6 +1,4 @@
-#include <iostream>
 #include <vector>
-using namespace std;
 
 template <typename elementtype>
 
@@ -8,59 +6,58 @@ class island
 {
 
 private:
-    bool Condition(vector<vector<int>> &matrix, int i, int j, int r, int c)
+    bool Condition(std::vector<std::vector<int>> &matrica, int i, int j, int r, int c)
     {
 
-        return !(j < 0 || i < 0 || j > (c - 1) || i > (r - 1) || matrix[i][j] != 1);
+        return !(j < 0 || i < 0 || j > (c - 1) || i > (r - 1) || matrica[i][j] != 1);
     }
 
-    void DepthFirstSearch(vector<vector<int>> &matrix, int i, int j, int r, int c)
+    void DFS_traversal(std::vector<std::vector<int>> &matrica, int i, int j, int r, int c)
     {
 
-        if (Condition(matrix, i, j, r, c))
+        if (Condition(matrica, i, j, r, c))
         {
 
-            if (matrix[i][j] == 1)
+            if (matrica[i][j] == 1)
             {
-                matrix[i][j] = 0;
-                DepthFirstSearch(matrix, i + 1, j, r, c);
-                DepthFirstSearch(matrix, i + 1, j + 1, r, c);
-                DepthFirstSearch(matrix, i + 1, j - 1, r, c);
-                DepthFirstSearch(matrix, i - 1, j, r, c);
-                DepthFirstSearch(matrix, i - 1, j - 1, r, c);
-                DepthFirstSearch(matrix, i - 1, j + 1, r, c);
-                DepthFirstSearch(matrix, i, j + 1, r, c);
-                DepthFirstSearch(matrix, i, j - 1, r, c);
+                matrica[i][j] = 0;
+                DFS_traversal(matrica, i + 1, j, r, c);
+                DFS_traversal(matrica, i + 1, j + 1, r, c);
+                DFS_traversal(matrica, i + 1, j - 1, r, c);
+                DFS_traversal(matrica, i - 1, j, r, c);
+                DFS_traversal(matrica, i - 1, j - 1, r, c);
+                DFS_traversal(matrica, i - 1, j + 1, r, c);
+                DFS_traversal(matrica, i, j + 1, r, c);
+                DFS_traversal(matrica, i, j - 1, r, c);
             }
         }
     }
 
 public:
-    int countIslands(vector<vector<int>> &matrix)
+    short CountIslands(std::vector<std::vector<int>> &matrica)
     {
-        int r = matrix.size();
-        int c = matrix[0].size();
-        int count = 0;
-        for (int i = 0; i < r; i++) //za retke
+        int r = matrica.size();
+        int c = matrica[0].size();
+        if (r == 1 && c == 1)
         {
-            for (int j = 0; j < c; j++) //za stupce
-            {
-                if (matrix[i][j] == 1)
-                {
-                    matrix[i][j] = 0;
-                    count++; //ako je element 0, povecaj brojac na 1
+            if (matrica[0][0] == 1)
+                return 1;
+            else
+                return 0;
+        }
 
-                    DepthFirstSearch(matrix, i + 1, j, r, c);     //right side traversal
-                    DepthFirstSearch(matrix, i + 1, j + 1, r, c); //upward-right side traversal
-                    DepthFirstSearch(matrix, i + 1, j - 1, r, c); //downward-right side traversalmatrix
-                    DepthFirstSearch(matrix, i, j + 1, r, c);     //upward side traversal
-                    DepthFirstSearch(matrix, i, j - 1, r, c);     //downward side traversalmatrix
-                    DepthFirstSearch(matrix, i - 1, j - 1, r, c); //downward-left side traversal
-                    DepthFirstSearch(matrix, i - 1, j + 1, r, c); //upward-left side traversal
-                    DepthFirstSearch(matrix, i - 1, j, r, c);     //left side traversal
+        short counter = 0;
+        for (int i = 0; i < r; i++)
+        {
+            for (int j = 0; j < c; j++)
+            {
+                if (matrica[i][j] == 1)
+                {
+                    counter++;
+                    DFS_traversal(matrica, i, j, r, c);
                 }
             }
         }
-        return count;
+        return counter;
     }
 };
