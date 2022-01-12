@@ -1,5 +1,5 @@
 #include <iostream>
-#include "klase_otoci3.h"
+#include "otoci.h"
 using namespace std;
 
 int main()
@@ -12,7 +12,7 @@ int main()
     char izbor;
     int unos;
 
-    cout << "==========[IZBORNIK]==========\n1. Izracun za matricu unutar programa\n"
+    cout << "==============[IZBORNIK]==============\n1. Izracun za matricu unutar programa\n"
          << "2. Unos vlastite matrice\nx  Izlaz iz programa\n";
     cin >> izbor;
 
